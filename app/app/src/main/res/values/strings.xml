@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Tienda Móvil</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="products">Productos</string>
+    <string name="cart">Carrito</string>
+    <string name="clients">Clientes</string>
+    <string name="map">Mapa</string>
+    <string name="add">Agregar</string>
+    <string name="checkout">Finalizar compra</string>
+    <string name="register">Registrar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
+</resources>
