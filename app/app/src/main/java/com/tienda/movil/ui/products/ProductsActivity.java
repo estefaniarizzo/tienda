@@ -122,21 +122,34 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHold
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_2, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
         return new ProductViewHolder(v);
     }
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product p = products.get(position);
-        ((TextView) holder.itemView.findViewById(android.R.id.text1)).setText(p.name + " ($" + p.price + ")");
-        ((TextView) holder.itemView.findViewById(android.R.id.text2)).setText(p.description);
+        holder.tvName.setText(p.name);
+        holder.tvDesc.setText(p.description);
+        holder.tvPrice.setText("$" + p.price);
+        holder.btnAddToCart.setOnClickListener(v -> {
+            CartSingleton.getInstance().addToCart(p);
+            Toast.makeText(holder.itemView.getContext(), "Agregado al carrito", Toast.LENGTH_SHORT).show();
+        });
         holder.itemView.setOnClickListener(v -> listener.onEdit(p));
         holder.itemView.setOnLongClickListener(v -> { listener.onDelete(p); return true; });
     }
     @Override
     public int getItemCount() { return products.size(); }
     static class ProductViewHolder extends RecyclerView.ViewHolder {
-        ProductViewHolder(@NonNull View itemView) { super(itemView); }
+        TextView tvName, tvDesc, tvPrice;
+        Button btnAddToCart;
+        ProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvName = itemView.findViewById(R.id.tvProductName);
+            tvDesc = itemView.findViewById(R.id.tvProductDesc);
+            tvPrice = itemView.findViewById(R.id.tvProductPrice);
+            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
+        }
     }
 }
 
